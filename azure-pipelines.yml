@@ -74,16 +74,22 @@ steps:
 #    sourceSlot: $(slotName)
 #    swapWithProduction: true
 
-jobs:
-- job: InitialJob  
-  steps:
-  - task: InvokeRESTAPI@1
-    inputs:
-      connectionType: 'connectedServiceName'
-      serviceConnection: $(serviceConnection) 
-      method: 'POST'
-      headers: '{Content-Type:application/json}'
-      body: '{"text": "Successful deploy of *streamfizz-api*", "type": "mrkdwn"}'
-      waitForCompletion: 'false'
-      #successCriteria: # Optional
-  pool: server
+stages:
+
+- stage: 'Notifications'
+  displayName: 'Notifications'
+  
+  jobs:
+  - job: WebHook slack
+    pool: server
+    steps:
+    - task: InvokeRESTAPI@1
+      inputs:
+        connectionType: 'connectedServiceName'
+        serviceConnection: $(serviceConnection) 
+        method: 'POST'
+        headers: '{Content-Type:application/json}'
+        body: '{"text": "Successful deploy of *streamfizz-api*", "type": "mrkdwn"}'
+        waitForCompletion: 'false'
+        #successCriteria: # Optional
+  
