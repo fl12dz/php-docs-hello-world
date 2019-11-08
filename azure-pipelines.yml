@@ -62,3 +62,13 @@ steps:
     resourceGroupName: $(resourceGroupName)
     slotName: $(slotName)
     package: $(build.artifactstagingdirectory)/**/*.zip
+
+- task: AzureAppServiceManage@0
+  displayName: Azure Web App Swap staging into production
+  inputs:
+    azureSubscription: $(serviceConnectionToAzure)
+    action: 'Swap Slots'
+    appName: $(appName)
+    resourceGroupName: $(resourceGroupName)
+    sourceSlot: $(slotName)
+    swapWithProduction: true
