@@ -16,6 +16,8 @@ variables:
   # the name of your web app here is the same one you used above
   # when you created the web app using the Azure CLI
   appName: myFLApp
+  resourceGroupName: myapp-rg
+  slotName: staging
 
 steps:
 - script: |
@@ -42,10 +44,21 @@ steps:
   inputs:
     PathtoPublish: $(build.artifactstagingdirectory)
 
+#- task: AzureWebApp@1
+#  displayName: Azure Web App Deploy
+#  inputs:
+#    azureSubscription: $(serviceConnectionToAzure)
+#    appType: webAppLinux
+#    appName: $(appName)
+#    package: $(build.artifactstagingdirectory)/**/*.zip
+
 - task: AzureWebApp@1
-  displayName: Azure Web App Deploy
+  displayName: Azure Web App Deploy -staging
   inputs:
     azureSubscription: $(serviceConnectionToAzure)
     appType: webAppLinux
     appName: $(appName)
+    deployToSlotOrASE: true
+    resourceGroupName: $(resourceGroupName)
+    slotName: $(slotName)
     package: $(build.artifactstagingdirectory)/**/*.zip
