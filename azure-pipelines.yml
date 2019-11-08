@@ -75,8 +75,7 @@ steps:
 #    swapWithProduction: true
 
 jobs:
-- job: InitialJob
-  pool: server
+- job: InitialJob  
   steps:
   - task: InvokeRESTAPI@1
     inputs:
@@ -87,3 +86,4 @@ jobs:
       body: '{"text": "Successful deploy of *streamfizz-api*", "type": "mrkdwn"}'
       waitForCompletion: 'false'
       #successCriteria: # Optional
+  pool: server
