@@ -17,8 +17,7 @@ variables:
   # when you created the web app using the Azure CLI
   appName: myFLApp
   resourceGroupName: myapp-rg
-  slotName: staging
-  webAppName: myapp-service-plan
+  slotName: staging  
 
 steps:
 - script: |
@@ -68,9 +67,8 @@ steps:
   displayName: Azure Web App Swap staging into production
   inputs:
     azureSubscription: $(serviceConnectionToAzure)
-    webAppName: $(webAppName)
-    action: 'Swap Slots'
-    appName: $(appName)
+    webAppName: $(appName)
+    action: 'Swap Slots'    
     resourceGroupName: $(resourceGroupName)
     sourceSlot: $(slotName)
     swapWithProduction: true
