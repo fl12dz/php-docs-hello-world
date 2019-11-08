@@ -1,0 +1,10 @@
+{
+    "name": "larbi/php-docs-hello-world",
+    "authors": [
+        {
+            "name": "fl12dz",
+            "email": "fl12dz@yahoo.fr"
+        }
+    ],
+    "require": {}
+}
