@@ -17,7 +17,8 @@ variables:
   # when you created the web app using the Azure CLI
   appName: myFLApp
   resourceGroupName: myapp-rg
-  slotName: staging  
+  slotName: staging
+  serviceConnection: "https://hooks.slack.com/services/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" 
 
 steps:
 - script: |
@@ -72,3 +73,13 @@ steps:
     resourceGroupName: $(resourceGroupName)
     sourceSlot: $(slotName)
     swapWithProduction: true
+
+- task: InvokeRESTAPI@1
+  inputs:
+    connectionType: 'connectedServiceName'
+    serviceConnection: $(serviceConnection) 
+    method: 'POST'
+    headers: '{Content-Type:application/json}'
+    body: '{"text": "Successful deploy of *streamfizz-api*", "type": "mrkdwn"}'
+    waitForCompletion: 'false'
+    #successCriteria: # Optional
