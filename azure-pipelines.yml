@@ -2,12 +2,6 @@
 # Test and package your PHP project.
 # Add steps that run tests, save build artifacts, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/php
-variables:
-  # the name of the service connection that you created above
-  serviceConnectionToAzure: cx-to-myapp-rg
-  # the name of your web app here is the same one you used above
-  # when you created the web app using the Azure CLI
-  appName: myFLApp
 
 trigger:
 - master
@@ -17,6 +11,11 @@ pool:
 
 variables:
   phpVersion: 7.2
+  # the name of the service connection that you created above
+  serviceConnectionToAzure: cx-to-myapp-rg
+  # the name of your web app here is the same one you used above
+  # when you created the web app using the Azure CLI
+  appName: myFLApp
 
 steps:
 - script: |
